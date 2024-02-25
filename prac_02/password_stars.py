@@ -12,4 +12,5 @@ def get_password():
         print("Invalid password")
 
 
-main()
+if __name__ == '__main__':
+    main()

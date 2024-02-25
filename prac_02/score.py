@@ -20,4 +20,5 @@ def check_score(grade):
         print("Bad")
 
 
-main()
+if __name__ == '__main__':
+    main()

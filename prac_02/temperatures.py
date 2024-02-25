@@ -31,4 +31,5 @@ def calc_temperatures():
         print("Invalid option")
 
 
-main()
+if __name__ == '__main__':
+    main()
