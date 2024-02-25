@@ -9,7 +9,12 @@ MENU = """
     Q - Quit
 """
 
-while True:
+
+def main():
+    calc_temperatures()
+
+
+def calc_temperatures():
     print(MENU)
     choice = input(">>> ").upper()
     if choice == "C":
@@ -18,13 +23,12 @@ while True:
         print(f"Result: {fahrenheit:.2f} F")
     elif choice == "F":
         fahrenheit = float(input("Fahrenheit: "))
-        celsius = (fahrenheit -32)/9.0*5
+        celsius = (fahrenheit - 32) / 9.0 * 5
         print(f"Result: {celsius:.2f} C")
     elif choice == "Q":
         print("Thank you.")
-        break
     else:
         print("Invalid option")
 
 
-
+main()

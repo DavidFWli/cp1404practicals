@@ -1,20 +1,15 @@
-MENU = """
-    C - Enter your password
-    Q - Quit
-"""
+def main():
+    get_password()
 
-while True:
-    print(MENU)
-    choice = input(">>> ").upper()
-    if choice == "C":
-        length = len(input("Please enter you password: "))
-        if length >= 8:
-            print("Here is your password:")
-            print("*"*length)
-        else:
-            print("Invalid password, please try again")
-    elif choice == "Q":
-        print("Thank you.")
-        break
+
+def get_password():
+    pwd = input("Please enter you password (at least 8 chars): ")
+    length = len(pwd)
+    if length >= 8:
+        print("Here is your password:")
+        print("*" * length)
     else:
-        print("Invalid option")
+        print("Invalid password")
+
+
+main()
