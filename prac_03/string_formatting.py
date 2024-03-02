@@ -26,29 +26,18 @@ print("My {} would cost ${:,.2f}".format(name, cost))
 print(f"My {name} would cost ${cost:,.2f}")
 
 
-
-
-
-
-# Aligning columns by using width after the :
-# This loop uses enumerate, useful when you want both the index and value
 numbers = [1, 19, 123, 456, -25]
 
 for i, number in enumerate(numbers, 1):
     print(f"Number {i} is {number:5}")
 
-# TODO: Use f-string formatting to produce the output:
+"""below is the work I did"""
+
+
 print(f"{year} {name} for about ${cost:.0f}!")
-# 1922 Gibson L-5 CES for about $16,035!
 
 
 
-# TODO: Using a for loop with the range function and string formatting,
 nums = [0, 50, 100, 150]
 for i, num in enumerate(nums, 1):
     print(f"Number {i} is {num:4}")
-# produce the following right-aligned output (DO NOT use a list):
-#   0
-#  50
-# 100
-# 150
