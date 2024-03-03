@@ -26,4 +26,4 @@ with open("numbers.txt", "r") as file:
     lines = file.readlines()
     for i in range(len(lines)):
         lines[i] = lines[i].replace('\n', '')
-        print(lines)
+        print(lines[i])
