@@ -33,10 +33,7 @@ for i, number in enumerate(numbers, 1):
 
 """below is the work I did"""
 
-
 print(f"{year} {name} for about ${cost:.0f}!")
-
-
 
 nums = [0, 50, 100, 150]
 for i, num in enumerate(nums, 1):
