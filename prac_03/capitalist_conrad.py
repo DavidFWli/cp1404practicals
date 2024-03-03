@@ -14,7 +14,7 @@ MAX_DECREASE = 0.05  # 5%
 MIN_PRICE = 0.01
 MAX_PRICE = 100.0
 INITIAL_PRICE = 1.0
-i = 0
+days = 0
 price = INITIAL_PRICE
 print(f"${price:,.2f}")
 with open('output.txt', 'w') as f:
@@ -23,10 +23,10 @@ with open('output.txt', 'w') as f:
         random_int = random.randint(1, 2)
         if random.randint(1, 2) == 1:
             price_change = random.uniform(0, MAX_INCREASE)
-            i += 1
+            days += 1
         else:
             price_change = random.uniform(-MAX_DECREASE, 0)
-            i += 1
+            days += 1
 
         price *= (1 + price_change)
         print(f"On day {i} price is:${price:,.2f}")
