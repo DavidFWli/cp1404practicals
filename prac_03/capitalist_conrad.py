@@ -29,7 +29,7 @@ with open('output.txt', 'w') as f:
 
         price *= (1 + price_change)
         print(f"On day {days} price is:${price:,.2f}")
-        prices = f"{price:,.2f}"
-        f.write('on day ' + str(days) + ' price is: ' + ':' + str(prices)+ '\n')
+        price_str = f"{price:,.2f}"
+        f.write('on day ' + str(days) + ' price is: ' + ':' + str(price_str) + '\n')
 
 print("txt have been writen")
