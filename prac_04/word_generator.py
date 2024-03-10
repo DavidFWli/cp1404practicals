@@ -9,33 +9,35 @@ import random
 
 VOWELS = "aeiou"
 CONSONANTS = "bcdfghjklmnpqrstvwxyz"
-ALL_LETTERS = VOWELS + CONSONANTS
+
+
+def is_valid_format(word_format):
+    for char in word_format:
+        if char not in "cv":
+            return False
+    return True
 
 
 def generate_word(word_format):
     word = ""
     for char in word_format:
-        if char == "#":
-            word += random.choice(VOWELS)
-        elif char == "%":
+        if char == "c":
             word += random.choice(CONSONANTS)
-        elif char == "*":
-            word += random.choice(ALL_LETTERS)
-        else:
-            word += char
+        elif char == "v":
+            word += random.choice(VOWELS)
     return word
 
 
 def main():
     while True:
-        # Get the word format from the user
-        user_format = input(
-            "Enter a word format (use # for vowels, % for consonants, * for any letter, or a specific letter): ").lower()
-
-        # Optionally, automatically generate the word format
-        if input("Do you want to generate a random word format? (y/n): ").lower() == "y":
-            random_format = ''.join(random.choices("#%", k=random.randint(3, 8)))
-            user_format = random_format
+        # Get the word format from the user until a valid format is provided
+        valid_format = False
+        while not valid_format:
+            user_format = input("Enter a valid word format (use 'c' for consonants, 'v' for vowels): ").lower()
+            if is_valid_format(user_format):
+                valid_format = True
+            else:
+                print("Invalid format. Please use only 'c' and 'v'.")
 
         # Generate and print the word
         word = generate_word(user_format)
