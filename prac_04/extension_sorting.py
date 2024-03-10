@@ -24,5 +24,7 @@ print(data)
 # TODO: sort the following list of tuples by last name then first name
 items = [('123', 'Derek', 'Smith', 7), ('124', 'Carrie', 'Brown', 7),
          ('125', 'Bob', 'Smith', 6), ('126', 'Aaron', 'Hewitt', 6)]
-# ??
+# Sort the list of tuples based on the last name (index 2) and then the first name (index 1)
+items.sort(key=itemgetter(2, 1))
+
 print(items)

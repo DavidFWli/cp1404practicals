@@ -1,18 +1,17 @@
-for i in range(33, 127 + 1):
-    print(i, chr(i))
+def get_number(lower, upper):
+    while True:
+        try:
+            number = int(input(f"Enter a number ({lower}-{upper}): "))
+            if lower <= number <= upper:
+                return number
+            else:
+                print("Please enter a number within the given range!")
+        except ValueError:
+            print("Please enter a valid number!")
 
-while True:
-    x = input("Enter a character:")
-    if len(x) > 1:
-        continue
-
-    print("The ASCII code for %s is %d" % (x, ord(x)))
-
-    x = input("Enter a number between 33 and 127:")
-    try:
-        a = int(x)
-        if a < 33 or a > 127:
-            continue
-        print("The character for %d is %c" % (a, chr(a)))
-    except:
-        pass
+# Test the function
+try:
+    number = get_number(10, 50)
+    print(f"The number entered is: {number}")
+except KeyboardInterrupt:
+    print("Operation canceled by user.")
