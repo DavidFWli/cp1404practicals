@@ -14,6 +14,7 @@ def main():
     """Read and display student scores from scores file."""
     scores_file = open("scores.csv")
     scores_data = scores_file.readlines()
+    scores_file.close()
     print(scores_data)
     subjects = scores_data[0].strip().split(",")
 
@@ -25,8 +26,6 @@ def main():
         for subject, score in zip(subjects, score_strings):
             # Convert the score to an integer and append it to the subject's list
             scores_per_subject[subject].append(int(score))
-
-    scores_file.close()
 
     # Print the results in a nicely formatted table
     print("Subject\tMax\tMin\tAverage")
