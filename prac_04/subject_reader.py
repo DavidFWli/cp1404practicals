@@ -23,7 +23,6 @@ def display_subject_details(data):
     """Display subject details in a formatted way."""
     for subject, lecturer, num_students in data:
         print(f"{subject} is taught by {lecturer} and has {num_students} students")
-    # print(get_data())
 
 
 main()
