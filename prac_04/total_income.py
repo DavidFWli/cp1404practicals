@@ -31,7 +31,7 @@ def calculate_cumulative_income():
         # Update the cumulative total by adding the current income
         cumulative_total += income
         # Print the income for the current month and the cumulative total
-        print(f"Month {month_counter} - Income: $    {income:.2f:>6} Total: $    {cumulative_total:.2f:>6}")
+        print(f"Month {month_counter}\t - Income: $\t{income:>10.2f} Total: $\t{cumulative_total:>10.2f}")
         # Increment the month counter
         month_counter += 1
 
