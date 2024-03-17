@@ -1,7 +1,9 @@
 def extract_name_from_email(email):
     parts = email.split('@')
-    name = parts[0].split('.')
-    return ' '.join(part.title() for part in name).strip()
+    if len(parts) == 2:
+        name = parts[0].split('.')
+        return ' '.join(part.title() for part in name).strip()
+    return None
 
 
 def get_user_input():
@@ -12,6 +14,9 @@ def get_user_input():
             break
 
         extracted_name = extract_name_from_email(email)
+        if extracted_name is None:
+            print("invalid email address")
+            continue
         print("Is your name", extracted_name, "? (Y/n)")
         choice = input().lower()
 
