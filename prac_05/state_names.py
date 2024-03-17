@@ -28,4 +28,4 @@ while True:
 
 # Print all states and names neatly aligned
 for code, name in CODE_TO_NAME.items():
-    print(f"{code.upper():<10} is {name}")
+    print(f"{code.upper()}\t is {name}")
