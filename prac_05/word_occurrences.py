@@ -32,7 +32,7 @@ def count_words(string):
     # Print the formatted word counts
     for word in sorted_words:
         count = word_counts[word]
-        formatted_word = word.ljust(len(longest_word))  # Left-justify the word to match the longest word's length
+        formatted_word = word.rjust(len(longest_word))  # Right-justify the word to match the longest word's length
         print(f"{formatted_word} : {count}")
 
 
