@@ -17,9 +17,11 @@ def get_color_code(color_name):
     color_name_lower = color_name.lower()
 
     # Check if the color name exists in the dictionary
-    if color_name_lower in COLOR_CODES:
+    try:
         return COLOR_CODES[color_name_lower]
-    else:
+
+    except Exception as ex:
+        print(ex)
         return None
 
 
@@ -40,5 +42,3 @@ while True:
         print(f"The hexadecimal code for {color_name} is {color_code}")
     else:
         print(f"Invalid color name: {color_name}")
-
-get_color_code(color_name)
