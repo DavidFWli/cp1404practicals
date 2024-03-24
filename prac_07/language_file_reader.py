@@ -22,15 +22,20 @@ def main():
     for line in in_file:
         # Strip newline from end and split it into parts (CSV)
         parts = line.strip().split(',')
-        print(parts)  # 添加这行来查看parts的内容
-        # Reflection and Pointer Arithmetic are stored as strings (Yes/No) and we want a Boolean
-        reflection = parts[2] == "Yes"
-        pointer_arithmetic = parts[3] == "Yes"
-        # Construct a ProgrammingLanguage object using the elements
-        # year should be an int
-        language = ProgrammingLanguage(parts[0], parts[1], reflection, pointer_arithmetic, int(parts[4]))
-        # Add the language we've just constructed to the list
-        languages.append(language)
+        if len(parts) >= 5:  # Ensure the line has at least 5 elements
+            # Reflection and Pointer Arithmetic are stored as strings (Yes/No) and we want a Boolean
+            reflection = parts[2] == "Yes"
+            pointer_arithmetic = parts[3] == "Yes"
+            try:
+                # Construct a ProgrammingLanguage object using the elements
+                # year should be an int
+                language = ProgrammingLanguage(parts[0], parts[1], reflection, pointer_arithmetic, int(parts[4]))
+                # Add the language we've just constructed to the list
+                languages.append(language)
+            except ValueError:
+                print(f"Skipping line: {line.strip()} (invalid data)")
+        else:
+            print(f"Skipping line: {line.strip()} (not enough elements)")
     # Close the file as soon as we've finished reading it
     in_file.close()
 
