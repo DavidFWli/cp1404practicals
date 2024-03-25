@@ -34,45 +34,50 @@ def display_movies(movies):
 
 
 def add_movie(movies):
+    print("Adding a new movie:")
     title = input("Title: ").strip()
     while not title:
-        print("Input can not be blank")
+        print("Title cannot be blank.")
         title = input("Title: ").strip()
 
-    year = input("Year: ")
-    while not year.isdigit() or int(year) < 0:
-        print("Invalid input; enter a valid number")
+    while True:
         year = input("Year: ")
+        if year.isdigit() and int(year) >= 0:
+            break
+        elif year.startswith('-'):
+            print("Number must be >= 0")
+        else:
+            print("Invalid input; enter a valid number")
 
     category = input("Category: ").strip()
     while not category:
-        print("Input can not be blank")
+        print("Category cannot be blank.")
         category = input("Category: ").strip()
 
     movies.append([title, year, category, UNWATCHED])
-    print(f"{title} ({category} from {year}) added to movie list")
-
+    print(f"'{title}' ({category} - {year}) added to the movie list.")
 
 def watch_movie(movies):
-    unwatched_movies = [index for index, movie in enumerate(movies) if movie[3] == UNWATCHED]
-    if not unwatched_movies:
-        print("No more movies to watch!")
-        return
-
-    display_movies(movies)
-    try:
-        choice = int(input("Enter the number of a movie to mark as watched\n"))
-        if choice < 0 or choice >= len(movies):
-            print("Invalid movie number")
+    while True:
+        unwatched_movies = [index for index, movie in enumerate(movies) if movie[3] == UNWATCHED]
+        if not unwatched_movies:
+            print("No more movies to watch!")
             return
+        display_movies(movies)
+        try:
+            choice = int(input("Enter the number of a movie to mark as watched\n"))
+            if choice < 0 or choice >= len(movies):
+                print("Invalid movie number")
+                continue
 
-        if choice in unwatched_movies:
-            movies[choice][3] = WATCHED
-            print(f"{movies[choice][0]} from {movies[choice][1]} watched")
-        else:
-            print("You have already watched", movies[choice][0])
-    except ValueError:
-        print("Invalid input; enter a valid number")
+            if choice in unwatched_movies:
+                movies[choice][3] = WATCHED
+                print(f"{movies[choice][0]} from {movies[choice][1]} watched")
+            else:
+                print("You have already watched", movies[choice][0])
+            break  # Exit the loop if the input is valid
+        except ValueError:
+            print("Invalid input; enter a valid number")
 
 
 # Main function
