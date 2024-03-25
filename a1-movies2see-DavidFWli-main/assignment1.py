@@ -66,15 +66,29 @@ def add_movie(movies):
 
 
 def watch_movie(movies):
+    show_prompt = True
+
     while True:
         unwatched_movies = [index for index, movie in enumerate(movies) if movie[3] == UNWATCHED]
         if not unwatched_movies:
             print("No more movies to watch!")
             return
 
+        if show_prompt:
+            print("Enter the number of a movie to mark as watched")
+            show_prompt = False
+
         try:
-            display_movies(movies)
-            choice = int(input("Enter the number of a movie to mark as watched\n~ "))
+            choice = input("~ ").strip()
+            if not choice:
+                print("Invalid input; enter a valid number")
+                continue
+
+            if not choice.lstrip('-').isdigit():
+                print("Invalid input; enter a valid number")
+                continue
+
+            choice = int(choice)
             if choice < 0:
                 print("Number must be >= 0")
                 continue
@@ -87,9 +101,11 @@ def watch_movie(movies):
                 print(f"{movies[choice][0]} from {movies[choice][1]} watched")
             else:
                 print("You have already watched", movies[choice][0])
-            break  # Exit the loop if the input is valid
+
+            show_prompt = True
         except ValueError:
             print("Invalid input; enter a valid number")
+        break
 
 
 # Main function

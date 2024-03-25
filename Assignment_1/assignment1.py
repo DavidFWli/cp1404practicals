@@ -1,7 +1,7 @@
 import csv
 
 # Constants
-MOVIES_FILE = "Movies2See.csv"
+MOVIES_FILE = "movies.csv"
 UNWATCHED = "u"
 WATCHED = "w"
 
@@ -11,7 +11,10 @@ def load_movies():
     try:
         with open(MOVIES_FILE, "r", newline="") as file:
             reader = csv.reader(file)
-            return list(reader)
+            movies = list(reader)
+            # Sort movies by year
+            movies.sort(key=lambda x: int(x[1]))
+            return movies
     except FileNotFoundError:
         return []
 
@@ -24,12 +27,16 @@ def save_movies(movies):
 
 def display_movies(movies):
     unwatched_count = 0
+    max_title_length = max(len(movie[0]) for movie in movies)
+    max_category_length = max(len(movie[2]) for movie in movies)
+
     for index, movie in enumerate(movies):
         if movie[3] == UNWATCHED:
-            print(f"{index}. * {movie[0]} - {movie[2]} ({movie[1]})")
+            print(f"{index:2}. * {movie[0]:<{max_title_length}} - {movie[2]:<{max_category_length}} ({movie[1]})")
             unwatched_count += 1
         else:
-            print(f"{index}. {movie[0]} - {movie[2]} ({movie[1]})")
+            print(f"{index:2}.   {movie[0]:<{max_title_length}} - {movie[2]:<{max_category_length}} ({movie[1]})")
+
     print(f"{unwatched_count} movies watched, {len(movies) - unwatched_count} movies still to watch")
 
 
@@ -57,16 +64,20 @@ def add_movie(movies):
     movies.append([title, year, category, UNWATCHED])
     print(f"'{title}' ({category} - {year}) added to the movie list.")
 
+
 def watch_movie(movies):
     while True:
         unwatched_movies = [index for index, movie in enumerate(movies) if movie[3] == UNWATCHED]
         if not unwatched_movies:
             print("No more movies to watch!")
             return
-        display_movies(movies)
+
         try:
-            choice = int(input("Enter the number of a movie to mark as watched\n"))
-            if choice < 0 or choice >= len(movies):
+            choice = int(input("Enter the number of a movie to mark as watched\n~ "))
+            if choice < 0:
+                print("Number must be >= 0")
+                continue
+            elif choice >= len(movies):
                 print("Invalid movie number")
                 continue
 
