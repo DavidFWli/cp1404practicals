@@ -1,7 +1,7 @@
 """
 Kivy example for CP1404/CP5632, IT@JCU
 Dynamically create buttons based on content of dictionary
-Lindsay Ward, first version: 11/07/2016
+LI HEWEI, first version: 11/07/2016
 """
 
 from kivy.app import App
