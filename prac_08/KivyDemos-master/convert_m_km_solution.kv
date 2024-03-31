@@ -6,7 +6,8 @@ BoxLayout:
             id: input_miles
             text: '34'
             font_size: 48
-            on_text: app.handle_calculate()
+            input_filter: 'float'
+            on_text: app.handle_calculate(self.text)
         BoxLayout:
             orientation: 'vertical'
             size_hint_x: 0.25
@@ -16,11 +17,7 @@ BoxLayout:
             Button:
                 text: 'Down'
                 on_press: app.handle_increment(-1)
-#    Button:
-#        text: 'Convert m to km'
-#        on_press: app.handle_calculate()
     Label:
-        id: output_label
         font_size: 48
-        text: '54.717'
+        text: app.km_output
         color: (1, 1, 0, 1)
