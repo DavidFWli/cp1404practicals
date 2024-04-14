@@ -7,21 +7,23 @@ class Taxi:
         self.rate = rate
 
     def drive(self, distance):
-        if self.fuel >= distance:
-            self.fuel -= distance
-            self.odometer += distance
-            self.current_fare_km += distance
-            cost = distance * self.rate
-            if self.name == "Limo":
-                cost += 4.50  # flagfall
-            return cost
-        else:
-            return "Insufficient fuel"
+        if self.fuel == 0:
+            print("Insufficient fuel. Refueling required.")
+            return None
+
+        actual_distance = min(distance, self.fuel)
+        self.fuel -= actual_distance
+        self.odometer += actual_distance
+        self.current_fare_km += actual_distance
+        cost = actual_distance * self.rate
+        if self.name == "Limo":
+            cost += 4.50  # flagfall
+
+        return cost
 
     def __str__(self):
         return f"{self.name}, fuel={self.fuel}, odometer={self.odometer}, " \
-               f"{self.current_fare_km}km on current fare, " \
-               f"${self.rate}/km"
+               f"current_fare_km={self.current_fare_km}, rate=${self.rate}/km"
 
 
 def main():
