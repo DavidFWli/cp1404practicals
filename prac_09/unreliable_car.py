@@ -1,5 +1,6 @@
 import random
-from car import Car
+from prac_06.car import Car
+
 
 class UnreliableCar(Car):
     def __init__(self, name, fuel, reliability):
