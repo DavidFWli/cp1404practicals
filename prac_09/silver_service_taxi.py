@@ -7,7 +7,7 @@ class SilverServiceTaxi(Taxi):
     def __init__(self, name, fuel, fanciness, price_per_km):
         super().__init__(name, fuel)
         self.price_per_km *= fanciness
-        self.flagfall = SilverServiceTaxi.flagfall  # 设置self.flagfall为类属性flagfall的值
+        self.flagfall = SilverServiceTaxi.flagfall
 
     def get_fare(self):
         return super().get_fare() + self.flagfall
