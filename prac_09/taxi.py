@@ -1,14 +1,10 @@
-"""
-CP1404/CP5632 Practical
-Car class
-"""
 from prac_06.car import Car
 
 
 class Taxi(Car):
     """Specialised version of a Car that includes fare costs."""
     price_per_km = 1.23  # Class variable
-    flagfall = 4.50
+
 
     def __init__(self, name, fuel):
         """Initialise a Taxi instance, based on parent class Car."""
@@ -22,8 +18,10 @@ class Taxi(Car):
         return f"{car_details}, {fare_details}"
 
     def get_fare(self):
-        """Return the total price for the taxi trip including the flagfall."""
-        return round(self.price_per_km * self.current_fare_distance + self.flagfall, 2)
+        """Return the total price for the taxi trip including the flagfall, rounded to the nearest 10 cents."""
+        fare = self.price_per_km * self.current_fare_distance + self.flagfall
+        rounded_fare = round(fare, -1)  # Round to the nearest 10 cents
+        return rounded_fare
 
     def start_fare(self):
         """Begin a new fare."""
