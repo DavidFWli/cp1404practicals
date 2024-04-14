@@ -1,5 +1,5 @@
 import random
-from prac_06.car import Car
+from car import Car
 
 
 class UnreliableCar(Car):
