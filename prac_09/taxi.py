@@ -2,16 +2,16 @@
 CP1404/CP5632 Practical
 Car class
 """
-from prac_09.car import Car
+from prac_06.car import Car
 
 
 class Taxi(Car):
     """Specialised version of a Car that includes fare costs."""
+    price_per_km = 1.23  # Class variable
 
-    def __init__(self, name, fuel, price_per_km):
+    def __init__(self, name, fuel):
         """Initialise a Taxi instance, based on parent class Car."""
         super().__init__(name, fuel)
-        self.price_per_km = price_per_km
         self.current_fare_distance = 0
 
     def __str__(self):
@@ -20,7 +20,7 @@ class Taxi(Car):
 
     def get_fare(self):
         """Return the price for the taxi trip."""
-        return self.price_per_km * self.current_fare_distance
+        return round(self.price_per_km * self.current_fare_distance, 2)
 
     def start_fare(self):
         """Begin a new fare."""
