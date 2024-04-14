@@ -25,6 +25,8 @@ class Taxi:
         return f"{self.name}, fuel={self.fuel}, odometer={self.odometer}, " \
                f"current_fare_km={self.current_fare_km}, rate=${self.rate}/km"
 
+def print_bill_to_date(total_bill):
+    print(f"Bill to date: ${total_bill:.2f}")
 
 def main():
     taxis = [
@@ -37,7 +39,7 @@ def main():
 
     while True:
         print("q)uit, c)hoose taxi, d)rive")
-        choice = input(">>> ")
+        choice = input(">>> ").lower()  # 将输入转换为小写
         if choice == "q":
             print(f"Total trip cost: ${total_bill:.2f}")
             print("Taxis are now:")
@@ -77,6 +79,7 @@ def main():
         else:
             print("Invalid option")
             print("Bill to date: ${:.2f}".format(total_bill))
+
 
 
 if __name__ == "__main__":
