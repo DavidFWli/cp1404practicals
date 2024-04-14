@@ -1,5 +1,5 @@
 class Taxi:
-    price_per_km = 2.46  # 类属性，定义每公里的价格
+    price_per_km = 1.23  # 类属性，定义每公里的价格
 
     def __init__(self, fuel, odometer):
         self.fuel = fuel
