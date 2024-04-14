@@ -1,32 +1,18 @@
-class Taxi:
-    price_per_km = 1.23  # 类属性，定义每公里的价格
-
-    def __init__(self, fuel, odometer):
-        self.fuel = fuel
-        self.odometer = odometer
-        self.current_fare = 0
-
-    def calculate_fare(self, distance):
-        self.current_fare = self.price_per_km * distance
-
-    def __str__(self):
-        return f"{self.__class__.__name__}, fuel={self.fuel}, odo={self.odometer}, {self.current_fare}km on current fare, ${self.price_per_km:.2f}/km"
-
+from taxi import Taxi
 
 class SilverServiceTaxi(Taxi):
-    flagfall = 4.50
+    flagfall = 4.50  # Class variable for the flagfall charge
 
-    def __init__(self, fuel, odometer, fanciness):
-        super().__init__(fuel, odometer)  # 调用父类的构造函数
+    def __init__(self, model, fuel_capacity, fanciness):
+        super().__init__(model, fuel_capacity)
         self.fanciness = fanciness
-        self.price_per_km = Taxi.price_per_km * fanciness  # 设置每公里的价格，基于豪华程度
+        self.price_per_km = Taxi.price_per_km * self.fanciness  # Customize the price_per_km based on fanciness
 
-    def calculate_fare(self, distance):
-        super().calculate_fare(distance)  # 调用父类的计算费用方法
-        self.current_fare += self.flagfall  # 添加起步价到总费用
+    def get_fare(self):
+        fare = super().get_fare() * self.price_per_km  # Call the parent's get_fare() method and multiply by fanciness
+        fare += SilverServiceTaxi.flagfall  # Add the flagfall charge
+        return fare
 
     def __str__(self):
-        return (
-            f"SilverServiceTaxi, fuel={self.fuel}, odo={self.odometer}, "
-            f"{self.odometer}km on current fare, ${self.price_per_km:.2f}/km plus flagfall of $4.50"
-        )
+        base_str = super().__str__()  # Reuse the parent's __str__ method
+        return f"{base_str}, {self.price_per_km:.2f}/km plus flagfall of ${SilverServiceTaxi.flagfall:.2f}"

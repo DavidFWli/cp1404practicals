@@ -6,8 +6,9 @@ class Band:
     def play(self):
         print(self.name)
         for musician in self.musicians:
-            if musician.instruments:
-                print(f"{musician.name} is playing: {', '.join(str(inst) for inst in musician.instruments)}")
+            instruments_str = ", ".join(str(inst) for inst in musician.instruments)
+            if instruments_str:
+                print(f"{musician.name} is playing: {instruments_str}")
             else:
                 print(f"{musician.name} needs an instrument!")
 
@@ -21,18 +22,11 @@ class Musician:
         self.instruments.append(instrument)
 
 
-class Guitar:
-    def __init__(self, model, price):
+class Instrument:
+    def __init__(self, name, model, year, price):
+        self.name = name
         self.model = model
-        self.price = price
-
-    def __str__(self):
-        return f"{self.model} : ${self.price:.2f}"
-
-
-class Bass:
-    def __init__(self, model, price):
-        self.model = model
+        self.year = year
         self.price = price
 
     def __str__(self):
@@ -41,14 +35,16 @@ class Bass:
 
 # Example usage:
 if __name__ == "__main__":
-    nuno_guitar = Guitar("Washburn N4 (1990)", 2499.95)
-    takamine_guitar = Guitar("Takamine acoustic (1986)", 1200.00)
-    mouradian_bass = Bass("Mouradian CS-74 Bass (2009)", 1500.00)
+    nuno_instruments = [Instrument("Guitar", "Washburn N4", 1990, 2499.95),
+                        Instrument("Guitar", "Takamine acoustic", 1986, 1200.00)]
+    gary_instruments = []
+    pat_instruments = [Instrument("Bass", "Mouradian CS-74", 2009, 1500.00)]
+    kevin_instruments = []
 
-    nuno = Musician("Nuno Bettencourt", [nuno_guitar, takamine_guitar])
-    gary = Musician("Gary Cherone")
-    pat = Musician("Pat Badger", [mouradian_bass])
-    kevin = Musician("Kevin Figueiredo")
+    nuno = Musician("Nuno Bettencourt", nuno_instruments)
+    gary = Musician("Gary Cherone", gary_instruments)
+    pat = Musician("Pat Badger", pat_instruments)
+    kevin = Musician("Kevin Figueiredo", kevin_instruments)
 
     extreme = Band("Extreme", [nuno, gary, pat, kevin])
     extreme.play()
