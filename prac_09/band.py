@@ -4,11 +4,11 @@ class Band:
         self.musicians = musicians
 
     def play(self):
-        print(self.name)
+        print(f"band ({type(self).__name__})")
+        print(f"{self.name} ({', '.join(str(musician) for musician in self.musicians)})")
         for musician in self.musicians:
-            instruments_str = ", ".join(str(inst) for inst in musician.instruments)
-            if instruments_str:
-                print(f"{musician.name} is playing: {instruments_str}")
+            if musician.instruments:
+                print(f"{musician.name} is playing: {', '.join(str(inst) for inst in musician.instruments)}")
             else:
                 print(f"{musician.name} needs an instrument!")
 
@@ -21,6 +21,9 @@ class Musician:
     def add_instrument(self, instrument):
         self.instruments.append(instrument)
 
+    def __str__(self):
+        return f"{self.name} ({', '.join(str(inst) for inst in self.instruments)})"
+
 
 class Instrument:
     def __init__(self, name, model, year, price):
@@ -30,7 +33,7 @@ class Instrument:
         self.price = price
 
     def __str__(self):
-        return f"{self.model} : ${self.price:.2f}"
+        return f"{self.model} ({self.year}) : ${self.price:,.2f}"
 
 
 # Example usage:
