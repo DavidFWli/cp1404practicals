@@ -1,10 +1,9 @@
-from prac_06.car import Car
+from car import Car
 
 
 class Taxi(Car):
     """Specialised version of a Car that includes fare costs."""
     price_per_km = 1.23  # Class variable
-
 
     def __init__(self, name, fuel):
         """Initialise a Taxi instance, based on parent class Car."""
