@@ -59,10 +59,7 @@ class MovieApp(App):
         scroll_view.add_widget(self.movies_list)
         right_layout.add_widget(scroll_view)
 
-        # Modify button text and binding
-        welcome_button = Button(text='Welcome to Movie2see :)', size_hint_y=None, height='48dp')
-        welcome_button.bind(on_press=self.welcome_message)  # Change binding function
-        right_layout.add_widget(welcome_button)
+        right_layout.add_widget(Label(text='Welcome to Movie2see :)'))
 
         grid_layout.add_widget(right_layout)
 
