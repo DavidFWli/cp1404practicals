@@ -21,7 +21,7 @@ class MovieApp(App):
 
         grid_layout = BoxLayout(orientation='horizontal', spacing=10)
 
-        left_layout = BoxLayout(orientation='vertical', spacing=10)
+        left_layout = BoxLayout(orientation='vertical', spacing=10, size_hint=(0.25, 1))
         add_button = Button(text='Add Movie', size_hint_y=None, height='48dp')
         add_button.bind(on_press=self.show_add_movie_popup)
         left_layout.add_widget(add_button)
@@ -38,7 +38,7 @@ class MovieApp(App):
 
         grid_layout.add_widget(left_layout)
 
-        right_layout = BoxLayout(orientation='vertical', spacing=5)
+        right_layout = BoxLayout(orientation='vertical', spacing=5, size_hint=(0.75, 1))
         scroll_view = ScrollView()
         self.movies_list = BoxLayout(orientation='vertical', spacing=5, padding=10)
         scroll_view.add_widget(self.movies_list)
