@@ -66,18 +66,26 @@
                 Label:
                     text: 'Sort:'  # Change text here
 
-                Button:
-                    text: 'Sample Movie 1'
+                GridLayout:
+                    cols: 1  # Set only one column for movie buttons
+                    spacing: 5
                     size_hint_y: None
-                    height: '40dp'
-                    canvas.before:
-                        Color:
-                            rgba: (0, 88, 88, 1)
+                    height: self.minimum_height  # Automatically adjust height
 
-                Button:
-                    text: 'Sample Movie 2'
-                    size_hint_y: None
-                    height: '40dp'
-                    canvas.before:
-                        Color:
-                            rgba: (88, 88, 0, 1)
+                    Button:
+                        text: 'Sample Movie 1'
+                        size_hint_x: 1  # Fill available width
+                        size_hint_y: None
+                        height: '40dp'
+                        canvas.before:
+                            Color:
+                                rgba: (0, 88, 88, 1)
+
+                    Button:
+                        text: 'Sample Movie 2'
+                        size_hint_x: 1  # Fill available width
+                        size_hint_y: None
+                        height: '40dp'
+                        canvas.before:
+                            Color:
+                                rgba: (88, 88, 0, 1)

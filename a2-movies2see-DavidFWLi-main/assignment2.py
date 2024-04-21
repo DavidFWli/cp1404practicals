@@ -107,9 +107,6 @@ class MovieApp(App):
         self.year_input.text = ''
         self.category_input.text = ''
 
-    def welcome_message(self, instance):
-        print("Welcome to Movie2see :)")
-
     def get_movie_count_text(self):
         unwatched_count = len([movie for movie in self.movies if movie[3] == UNWATCHED])
         watched_count = len([movie for movie in self.movies if movie[3] == WATCHED])
