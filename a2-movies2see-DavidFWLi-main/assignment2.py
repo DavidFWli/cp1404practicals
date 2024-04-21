@@ -102,11 +102,15 @@ class MovieApp(App):
         self.movies_layout.clear_widgets()
 
         for movie in self.movies:
-            watched_status = "watched" if movie[3] == WATCHED else ""
+            watched_status = " watched" if movie[3] == WATCHED else ""
             button_text = f"{movie[0]} - ({movie[2]} {movie[1]}){watched_status}"
-            button = Button(text=button_text, size_hint_y=None, height='90dp')
+            button = Button(text=button_text, size_hint_y=None, height=1)  # Set initial height to 1
+            button.bind(height=self.adjust_button_height)  # Bind adjust_button_height method
             button.background_color = (0, 88, 88, 0.5) if movie[3] == UNWATCHED else (88, 88, 0, 0.5)
             self.movies_layout.add_widget(button)
+
+    def adjust_button_height(self, instance, value):
+        instance.height = instance.texture_size[1] + 20
 
     def add_movie(self, instance):
         title = self.title_input.text.strip()
@@ -117,6 +121,9 @@ class MovieApp(App):
             self.movies.insert(0, [title, year, category, UNWATCHED])
             self.display_movies()
             self.save_movies()
+
+            # Scroll the ScrollView to the top
+            self.root.ids.scroll_view.scroll_to(self.movies_layout.children[0])
 
     def clear_inputs(self, instance):
         self.title_input.text = ''
