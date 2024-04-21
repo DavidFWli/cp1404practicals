@@ -21,7 +21,9 @@ class MovieApp(App):
 
         # Sort Layout
         sort_layout = BoxLayout(orientation='horizontal', size_hint_y=None, height='48dp', spacing=10)
-        sort_label = Label(text='Sort:', size_hint_x=None, width='100dp', halign='center')
+        sort_label = Label(text='Sort:', size_hint=(None, None), size=('100dp', '48dp'),
+                           halign='center', valign='middle')
+
         sort_layout.add_widget(sort_label)
         self.movie_count_label = Label(text=self.get_movie_count_text())
         sort_layout.add_widget(self.movie_count_label)
@@ -32,6 +34,10 @@ class MovieApp(App):
 
         # Left Layout
         left_layout = BoxLayout(orientation='vertical', spacing=10, size_hint=(0.25, 1))
+
+        category_button = Button(text='Category', size_hint_y=None, height='48dp')
+        category_button.bind(on_press=self.add_movie)
+        left_layout.add_widget(category_button)
 
         left_layout.add_widget(Label(text='Title:'))
         self.title_input = TextInput(multiline=False)
@@ -56,15 +62,18 @@ class MovieApp(App):
         # Right Layout
         right_layout = BoxLayout(orientation='vertical', spacing=5, size_hint=(0.75, 1))
 
-        # Welcome Label
-        welcome_label = Label(text='Welcome to Movie2see :)', size_hint=(1, None), height='48dp')
-        right_layout.add_widget(welcome_label)
-
         # Scroll View for movies
         scroll_view = ScrollView()
         self.movies_layout = BoxLayout(orientation='vertical', spacing=5, padding=10)
         scroll_view.add_widget(self.movies_layout)
         right_layout.add_widget(scroll_view)
+
+        bottom_right_layout = BoxLayout(size_hint=(None, None), size=(layout.width, '30dp'),
+                                        pos_hint={'right': 0.5, 'bottom': 1, 'left': 0.5})
+        welcome_label = Label(text='Welcome to Movie2see :)', size_hint=(None, None), size=('100dp', '30dp'),
+                              halign='center', valign='middle')
+        bottom_right_layout.add_widget(welcome_label)
+        right_layout.add_widget(bottom_right_layout)
 
         grid_layout.add_widget(right_layout)
 
