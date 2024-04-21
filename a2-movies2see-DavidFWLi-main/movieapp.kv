@@ -38,7 +38,6 @@
             do_scroll_x: False
 
             BoxLayout:
-                id: movies_list
                 orientation: 'vertical'
                 spacing: 5
 
@@ -46,7 +45,7 @@
                     text: 'Welcome to Movie2see :)'
                     font_size: '20sp'
 
-                Label:
+                Button:
                     text: 'Sample Movie 1'
                     size_hint_y: None
                     height: '40dp'
@@ -54,7 +53,7 @@
                         Color:
                             rgba: (0, 88/255, 88/255, 1)
 
-                Label:
+                Button:
                     text: 'Sample Movie 2'
                     size_hint_y: None
                     height: '40dp'

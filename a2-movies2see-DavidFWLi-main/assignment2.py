@@ -5,6 +5,7 @@ from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.scrollview import ScrollView
 from kivy.properties import StringProperty
+from kivy.uix.popup import Popup
 import csv
 
 MOVIES_FILE = "movies.csv"
@@ -26,14 +27,14 @@ class MovieApp(App):
         left_layout.add_widget(add_button)
 
         left_layout.add_widget(Label(text='Title:'))
-        title_input = TextInput(multiline=False)
-        left_layout.add_widget(title_input)
+        self.title_input = TextInput(multiline=False)
+        left_layout.add_widget(self.title_input)
         left_layout.add_widget(Label(text='Year:'))
-        year_input = TextInput(input_type='number')
-        left_layout.add_widget(year_input)
+        self.year_input = TextInput(input_type='number')
+        left_layout.add_widget(self.year_input)
         left_layout.add_widget(Label(text='Category:'))
-        category_input = TextInput(multiline=False)
-        left_layout.add_widget(category_input)
+        self.category_input = TextInput(multiline=False)
+        left_layout.add_widget(self.category_input)
 
         grid_layout.add_widget(left_layout)
 
@@ -74,33 +75,38 @@ class MovieApp(App):
         self.movies_list.clear_widgets()
 
         for index, movie in enumerate(self.movies):
-            label_text = f"{movie[0]} - {movie[2]} ({movie[1]})"
-            watched_status = movie[3]
-            label = MovieLabel(text=label_text, watched_status=watched_status)
-            self.movies_list.add_widget(label)
+            button = Button(text=f"{movie[0]} - {movie[2]} ({movie[1]})", size_hint_y=None, height='40dp')
+            if movie[3] == UNWATCHED:
+                button.background_color = (0, 88/255, 88/255, 1)
+            else:
+                button.background_color = (88/255, 88/255, 0, 1)
+            self.movies_list.add_widget(button)
 
     def show_add_movie_popup(self, instance):
         popup_layout = BoxLayout(orientation='vertical')
 
-        title_input = TextInput(multiline=False)
-        year_input = TextInput(input_type='number')
-        category_input = TextInput(multiline=False)
-
         popup_layout.add_widget(Label(text='Title:'))
-        popup_layout.add_widget(title_input)
+        self.title_input_popup = TextInput(multiline=False)
+        popup_layout.add_widget(self.title_input_popup)
         popup_layout.add_widget(Label(text='Year:'))
-        popup_layout.add_widget(year_input)
+        self.year_input_popup = TextInput(input_type='number')
+        popup_layout.add_widget(self.year_input_popup)
         popup_layout.add_widget(Label(text='Category:'))
-        popup_layout.add_widget(category_input)
+        self.category_input_popup = TextInput(multiline=False)
+        popup_layout.add_widget(self.category_input_popup)
 
         add_button = Button(text='Add', size_hint_y=None, height='48dp')
-        add_button.bind(on_press=lambda instance: self.add_movie_to_list(title_input.text, year_input.text, category_input.text))
+        add_button.bind(on_press=self.add_movie_to_list_popup)
         popup_layout.add_widget(add_button)
 
         self.popup = Popup(title='Add Movie', content=popup_layout, size_hint=(None, None), size=(400, 300))
         self.popup.open()
 
-    def add_movie_to_list(self, title, year, category):
+    def add_movie_to_list_popup(self, instance):
+        title = self.title_input_popup.text.strip()
+        year = self.year_input_popup.text.strip()
+        category = self.category_input_popup.text.strip()
+
         if not title or not year or not category:
             return
 
@@ -118,9 +124,6 @@ class MovieApp(App):
         self.movies[movie_to_watch][3] = WATCHED
         self.display_movies()
         self.save_movies()
-
-class MovieLabel(Label):
-    watched_status = StringProperty()
 
 if __name__ == '__main__':
     MovieApp().run()
