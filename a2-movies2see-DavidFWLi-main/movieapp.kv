@@ -20,6 +20,7 @@
             Label:
                 text: f"Movies to Watch: {len([movie for movie in app.movies if movie[3] == UNWATCHED])} | Movies Watched: {len([movie for movie in app.movies if movie[3] == WATCHED])}"
                 id: movie_count_label
+                height: '48dp'
 
         GridLayout:
             cols: 2
@@ -56,6 +57,13 @@
                 id: category_input
                 multiline: False
 
+            # Button for category
+            Button:
+                text: 'Category'
+                size_hint_y: None
+                height: '48dp'
+                on_press: app.show_categories()
+
         ScrollView:
             do_scroll_x: False
 
@@ -76,7 +84,7 @@
                         text: 'Sample Movie 1'
                         size_hint_x: 1  # Fill available width
                         size_hint_y: None
-                        height: '40dp'
+                        height: '100dp'
                         canvas.before:
                             Color:
                                 rgba: (0, 88, 88, 1)
@@ -85,7 +93,7 @@
                         text: 'Sample Movie 2'
                         size_hint_x: 1  # Fill available width
                         size_hint_y: None
-                        height: '40dp'
+                        height: '100dp'
                         canvas.before:
                             Color:
                                 rgba: (88, 88, 0, 1)

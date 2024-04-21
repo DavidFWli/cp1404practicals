@@ -4,7 +4,6 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.scrollview import ScrollView
-from kivy.utils import get_color_from_hex
 import csv
 
 MOVIES_FILE = "movies.csv"
@@ -22,7 +21,8 @@ class MovieApp(App):
 
         # Sort Layout
         sort_layout = BoxLayout(orientation='horizontal', size_hint_y=None, height='48dp', spacing=10)
-        sort_layout.add_widget(Label(text='Sort:'))
+        sort_label = Label(text='Sort:', size_hint_x=None, width='100dp', halign='center')
+        sort_layout.add_widget(sort_label)
         self.movie_count_label = Label(text=self.get_movie_count_text())
         sort_layout.add_widget(self.movie_count_label)
         layout.add_widget(sort_layout)
@@ -32,6 +32,7 @@ class MovieApp(App):
 
         # Left Layout
         left_layout = BoxLayout(orientation='vertical', spacing=10, size_hint=(0.25, 1))
+
         left_layout.add_widget(Label(text='Title:'))
         self.title_input = TextInput(multiline=False)
         left_layout.add_widget(self.title_input)
@@ -54,12 +55,16 @@ class MovieApp(App):
 
         # Right Layout
         right_layout = BoxLayout(orientation='vertical', spacing=5, size_hint=(0.75, 1))
-        scroll_view = ScrollView()
-        self.movies_list = BoxLayout(orientation='vertical', spacing=5, padding=10)
-        scroll_view.add_widget(self.movies_list)
-        right_layout.add_widget(scroll_view)
 
-        right_layout.add_widget(Label(text='Welcome to Movie2see :)'))
+        # Welcome Label
+        welcome_label = Label(text='Welcome to Movie2see :)', size_hint=(1, None), height='48dp')
+        right_layout.add_widget(welcome_label)
+
+        # Scroll View for movies
+        scroll_view = ScrollView()
+        self.movies_layout = BoxLayout(orientation='vertical', spacing=5, padding=10)
+        scroll_view.add_widget(self.movies_layout)
+        right_layout.add_widget(scroll_view)
 
         grid_layout.add_widget(right_layout)
 
@@ -85,12 +90,12 @@ class MovieApp(App):
             writer.writerows(self.movies)
 
     def display_movies(self):
-        self.movies_list.clear_widgets()
+        self.movies_layout.clear_widgets()
 
         for movie in self.movies:
-            button = Button(text=f"{movie[0]} - {movie[2]} ({movie[1]})", size_hint_y=None, height='40dp')
+            button = Button(text=f"{movie[0]} - {movie[2]} ({movie[1]})", size_hint_y=None, height='90dp')
             button.background_color = (0, 88, 88, 0.5) if movie[3] == UNWATCHED else (88, 88, 0, 0.5)
-            self.movies_list.add_widget(button)
+            self.movies_layout.add_widget(button)
 
     def add_movie(self, instance):
         title = self.title_input.text.strip()
