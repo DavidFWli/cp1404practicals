@@ -102,7 +102,9 @@ class MovieApp(App):
         self.movies_layout.clear_widgets()
 
         for movie in self.movies:
-            button = Button(text=f"{movie[0]} - {movie[2]} ({movie[1]})", size_hint_y=None, height='90dp')
+            watched_status = "watched" if movie[3] == WATCHED else ""
+            button_text = f"{movie[0]} - ({movie[2]} {movie[1]}){watched_status}"
+            button = Button(text=button_text, size_hint_y=None, height='90dp')
             button.background_color = (0, 88, 88, 0.5) if movie[3] == UNWATCHED else (88, 88, 0, 0.5)
             self.movies_layout.add_widget(button)
 
