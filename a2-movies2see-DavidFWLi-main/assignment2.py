@@ -5,7 +5,6 @@ from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.scrollview import ScrollView
 from kivy.utils import get_color_from_hex
-from kivy.uix.popup import Popup
 import csv
 
 MOVIES_FILE = "movies.csv"
@@ -24,6 +23,7 @@ class MovieApp(App):
         sort_layout = BoxLayout(orientation='horizontal', size_hint_y=None, height='48dp', spacing=10)
         self.movie_count_label = Label(
             text=f"Movies to Watch: {len([movie for movie in self.movies if movie[3] == UNWATCHED])} | Movies Watched: {len([movie for movie in self.movies if movie[3] == WATCHED])}")
+        sort_layout.add_widget(Label(text='Text:', size_hint_x=None, width='80dp'))
         sort_layout.add_widget(self.movie_count_label)
         layout.add_widget(sort_layout)
 

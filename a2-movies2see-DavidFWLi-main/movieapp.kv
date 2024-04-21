@@ -12,15 +12,14 @@
             orientation: 'horizontal'
             spacing: 10
 
-            TextInput:
-                id: title_input
-                multiline: False
-                hint_text: 'New Movie'
-                font_size: '20sp'
+            Label:
+                text: 'Sort:'
+                size_hint_x: None
+                width: '80dp'
 
-            Button:
-                text: 'Category'
-                size_hint: (0.2, 1)  # 设置按钮宽度为输入框的20%
+            Label:
+                text: f"Movies to Watch: {len([movie for movie in self.movies if movie[3] == UNWATCHED])} | Movies Watched: {len([movie for movie in self.movies if movie[3] == WATCHED])}"
+                id: movie_count_label
 
         GridLayout:
             cols: 2
@@ -31,13 +30,13 @@
                 text: 'Add Movie'
                 size_hint_y: None
                 height: '48dp'
-                on_press: app.add_movie()
+                on_press: app.add_movie(self)
 
             Button:
                 text: 'Clear'
                 size_hint_y: None
                 height: '48dp'
-                on_press: app.clear_inputs()
+                on_press: app.clear_inputs(self)
 
             Label:
                 text: 'Title:'
@@ -56,12 +55,6 @@
             TextInput:
                 id: category_input
                 multiline: False
-
-        Label:
-            id: movie_count_label
-            text: 'Movies to Watch: 5 | Movies Watched: 10'
-            size_hint_y: None
-            height: '48dp'
 
         ScrollView:
             do_scroll_x: False
