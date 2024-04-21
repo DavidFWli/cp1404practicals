@@ -77,9 +77,9 @@ class MovieApp(App):
         for index, movie in enumerate(self.movies):
             button = Button(text=f"{movie[0]} - {movie[2]} ({movie[1]})", size_hint_y=None, height='40dp')
             if movie[3] == UNWATCHED:
-                button.background_color = (0, 88/255, 88/255, 1)
+                button.background_color = (0, 88, 88, 0.5)
             else:
-                button.background_color = (88/255, 88/255, 0, 1)
+                button.background_color = (88, 88, 0, 0.5)
             self.movies_list.add_widget(button)
 
     def show_add_movie_popup(self, instance):
