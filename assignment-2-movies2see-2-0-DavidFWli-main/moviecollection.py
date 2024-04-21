@@ -1,3 +1,4 @@
+# moviecollection.py
 import json
 from movie import Movie
 
@@ -14,7 +15,7 @@ class MovieCollection:
                     title = movie.get('title')
                     year = movie.get('year')
                     category = movie.get('category')
-                    status = movie.get('is_watched')  # Corrected to 'is_watched'
+                    status = movie.get('is_watched')
                     self.movies.append(Movie(title, year, category, status))
         except FileNotFoundError:
             print("File not found")
@@ -26,7 +27,7 @@ class MovieCollection:
                 'title': movie.title,
                 'year': movie.year,
                 'category': movie.category,
-                'is_watched': movie.status  # Save True or False, not "watched" or "unwatched"
+                'is_watched': movie.status
             })
         with open(self.filename, "w") as file:
             json.dump(movies_data, file, indent=4)
@@ -40,27 +41,3 @@ class MovieCollection:
     def __str__(self):
         movie_list = "\n".join(str(movie) for movie in self.movies)
         return f"Movies:\n{movie_list}"
-
-def run_movie_collection():
-    """Load, manipulate, and save movies using MovieCollection class."""
-
-    # Load movies from file
-    movie_collection = MovieCollection()
-    movie_collection.load_movies()
-
-    # Display loaded movies
-    print("Loaded movies:")
-    print(movie_collection)
-
-    # Sort movies by title and display
-    print("Sorted movies by title:")
-    movie_collection.sort("title")
-    print(movie_collection)
-
-    # Save movies to file (optional, only save when needed)
-    # movie_collection.save_movies()
-    # print("Movies saved.")
-
-# Only run the function if this script is executed directly, not imported
-if __name__ == "__main__":
-    run_movie_collection()
