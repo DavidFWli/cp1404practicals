@@ -1,0 +1,63 @@
+<MovieApp>:
+    orientation: 'vertical'
+    padding: 10
+
+    GridLayout:
+        cols: 2
+        spacing: 10
+
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: 10
+
+            Button:
+                text: 'Add Movie'
+                size_hint_y: None
+                height: '48dp'
+                on_press: app.show_add_movie_popup()
+
+            Label:
+                text: 'Title:'
+            TextInput:
+                id: title_input
+                multiline: False
+
+            Label:
+                text: 'Year:'
+            TextInput:
+                id: year_input
+                input_type: 'number'
+
+            Label:
+                text: 'Category:'
+            TextInput:
+                id: category_input
+                multiline: False
+
+        ScrollView:
+            do_scroll_x: False
+
+            BoxLayout:
+                id: movies_list
+                orientation: 'vertical'
+                spacing: 5
+
+                Label:
+                    text: 'Welcome to Movie2see :)'
+                    font_size: '20sp'
+
+                Label:
+                    text: 'Sample Movie 1'
+                    size_hint_y: None
+                    height: '40dp'
+                    canvas.before:
+                        Color:
+                            rgba: (0, 88/255, 88/255, 1)
+
+                Label:
+                    text: 'Sample Movie 2'
+                    size_hint_y: None
+                    height: '40dp'
+                    canvas.before:
+                        Color:
+                            rgba: (88/255, 88/255, 0, 1)
