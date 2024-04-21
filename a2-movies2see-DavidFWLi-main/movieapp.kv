@@ -18,7 +18,7 @@
                 height: '48dp'
 
             Label:
-                text: f"Movies to Watch: {len([movie for movie in self.movies if movie[3] == UNWATCHED])} | Movies Watched: {len([movie for movie in self.movies if movie[3] == WATCHED])}"
+                text: f"Movies to Watch: {len([movie for movie in app.movies if movie[3] == UNWATCHED])} | Movies Watched: {len([movie for movie in app.movies if movie[3] == WATCHED])}"
                 id: movie_count_label
 
         GridLayout:

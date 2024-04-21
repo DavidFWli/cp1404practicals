@@ -59,9 +59,10 @@ class MovieApp(App):
         scroll_view.add_widget(self.movies_list)
         right_layout.add_widget(scroll_view)
 
-        watch_button = Button(text='Watch Movie', size_hint_y=None, height='48dp')
-        watch_button.bind(on_press=self.watch_movie)
-        right_layout.add_widget(watch_button)
+        # Modify button text and binding
+        welcome_button = Button(text='Welcome to Movie2see :)', size_hint_y=None, height='48dp')
+        welcome_button.bind(on_press=self.welcome_message)  # Change binding function
+        right_layout.add_widget(welcome_button)
 
         grid_layout.add_widget(right_layout)
 
@@ -109,13 +110,8 @@ class MovieApp(App):
         self.year_input.text = ''
         self.category_input.text = ''
 
-    def watch_movie(self, instance):
-        unwatched_movies = [index for index, movie in enumerate(self.movies) if movie[3] == UNWATCHED]
-        if unwatched_movies:
-            movie_to_watch = unwatched_movies[0]
-            self.movies[movie_to_watch][3] = WATCHED
-            self.display_movies()
-            self.save_movies()
+    def welcome_message(self, instance):
+        print("Welcome to Movie2see :)")
 
     def get_movie_count_text(self):
         unwatched_count = len([movie for movie in self.movies if movie[3] == UNWATCHED])
