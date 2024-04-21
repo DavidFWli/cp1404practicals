@@ -5,6 +5,7 @@ from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.scrollview import ScrollView
 from kivy.utils import get_color_from_hex
+from kivy.uix.popup import Popup
 import csv
 
 MOVIES_FILE = "movies.csv"
@@ -21,17 +22,14 @@ class MovieApp(App):
         layout = BoxLayout(orientation='vertical', padding=10)
 
         sort_layout = BoxLayout(orientation='horizontal', size_hint_y=None, height='48dp', spacing=10)
-        self.movie_count_label = Label(text=f"Movies to Watch: {len([movie for movie in self.movies if movie[3] == UNWATCHED])} | Movies Watched: {len([movie for movie in self.movies if movie[3] == WATCHED])}")
+        self.movie_count_label = Label(
+            text=f"Movies to Watch: {len([movie for movie in self.movies if movie[3] == UNWATCHED])} | Movies Watched: {len([movie for movie in self.movies if movie[3] == WATCHED])}")
         sort_layout.add_widget(self.movie_count_label)
         layout.add_widget(sort_layout)
 
         grid_layout = BoxLayout(orientation='horizontal', spacing=10)
 
         left_layout = BoxLayout(orientation='vertical', spacing=10, size_hint=(0.25, 1))
-        add_button = Button(text='Add Movie', size_hint_y=None, height='48dp')
-        add_button.bind(on_press=self.add_movie)
-        left_layout.add_widget(add_button)
-
         left_layout.add_widget(Label(text='Title:'))
         self.title_input = TextInput(multiline=False)
         left_layout.add_widget(self.title_input)
@@ -41,6 +39,10 @@ class MovieApp(App):
         left_layout.add_widget(Label(text='Category:'))
         self.category_input = TextInput(multiline=False)
         left_layout.add_widget(self.category_input)
+
+        add_button = Button(text='Add Movie', size_hint_y=None, height='48dp')
+        add_button.bind(on_press=self.add_movie)
+        left_layout.add_widget(add_button)
 
         clear_button = Button(text='Clear', size_hint_y=None, height='48dp')
         clear_button.bind(on_press=self.clear_inputs)
