@@ -14,8 +14,8 @@
 
             Label:
                 text: 'Sort:'
-                size_hint_x: None
-                width: '80dp'
+                size_hint_y: None
+                height: '48dp'
 
             Label:
                 text: f"Movies to Watch: {len([movie for movie in self.movies if movie[3] == UNWATCHED])} | Movies Watched: {len([movie for movie in self.movies if movie[3] == WATCHED])}"

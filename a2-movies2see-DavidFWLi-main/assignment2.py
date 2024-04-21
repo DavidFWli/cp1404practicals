@@ -20,15 +20,17 @@ class MovieApp(App):
 
         layout = BoxLayout(orientation='vertical', padding=10)
 
+        # Sort Layout
         sort_layout = BoxLayout(orientation='horizontal', size_hint_y=None, height='48dp', spacing=10)
-        self.movie_count_label = Label(
-            text=f"Movies to Watch: {len([movie for movie in self.movies if movie[3] == UNWATCHED])} | Movies Watched: {len([movie for movie in self.movies if movie[3] == WATCHED])}")
-        sort_layout.add_widget(Label(text='Text:', size_hint_x=None, width='80dp'))
+        sort_layout.add_widget(Label(text='Sort:'))
+        self.movie_count_label = Label(text=self.get_movie_count_text())
         sort_layout.add_widget(self.movie_count_label)
         layout.add_widget(sort_layout)
 
+        # Main Layout
         grid_layout = BoxLayout(orientation='horizontal', spacing=10)
 
+        # Left Layout
         left_layout = BoxLayout(orientation='vertical', spacing=10, size_hint=(0.25, 1))
         left_layout.add_widget(Label(text='Title:'))
         self.title_input = TextInput(multiline=False)
@@ -50,6 +52,7 @@ class MovieApp(App):
 
         grid_layout.add_widget(left_layout)
 
+        # Right Layout
         right_layout = BoxLayout(orientation='vertical', spacing=5, size_hint=(0.75, 1))
         scroll_view = ScrollView()
         self.movies_list = BoxLayout(orientation='vertical', spacing=5, padding=10)
@@ -67,9 +70,6 @@ class MovieApp(App):
         self.display_movies()
 
         return layout
-
-    def reset_button_color(self, button):
-        button.background_color = get_color_from_hex('#ffffff')
 
     def load_movies(self):
         try:
@@ -89,12 +89,9 @@ class MovieApp(App):
     def display_movies(self):
         self.movies_list.clear_widgets()
 
-        for index, movie in enumerate(self.movies):
+        for movie in self.movies:
             button = Button(text=f"{movie[0]} - {movie[2]} ({movie[1]})", size_hint_y=None, height='40dp')
-            if movie[3] == UNWATCHED:
-                button.background_color = (0, 88, 88, 0.5)
-            else:
-                button.background_color = (88, 88, 0, 0.5)
+            button.background_color = (0, 88, 88, 0.5) if movie[3] == UNWATCHED else (88, 88, 0, 0.5)
             self.movies_list.add_widget(button)
 
     def add_movie(self, instance):
@@ -102,12 +99,10 @@ class MovieApp(App):
         year = self.year_input.text.strip()
         category = self.category_input.text.strip()
 
-        if not title or not year or not category:
-            return
-
-        self.movies.insert(0, [title, year, category, UNWATCHED])
-        self.display_movies()
-        self.save_movies()
+        if title and year and category:
+            self.movies.insert(0, [title, year, category, UNWATCHED])
+            self.display_movies()
+            self.save_movies()
 
     def clear_inputs(self, instance):
         self.title_input.text = ''
@@ -116,13 +111,16 @@ class MovieApp(App):
 
     def watch_movie(self, instance):
         unwatched_movies = [index for index, movie in enumerate(self.movies) if movie[3] == UNWATCHED]
-        if not unwatched_movies:
-            return
+        if unwatched_movies:
+            movie_to_watch = unwatched_movies[0]
+            self.movies[movie_to_watch][3] = WATCHED
+            self.display_movies()
+            self.save_movies()
 
-        movie_to_watch = unwatched_movies[0]
-        self.movies[movie_to_watch][3] = WATCHED
-        self.display_movies()
-        self.save_movies()
+    def get_movie_count_text(self):
+        unwatched_count = len([movie for movie in self.movies if movie[3] == UNWATCHED])
+        watched_count = len([movie for movie in self.movies if movie[3] == WATCHED])
+        return f"Movies to Watch: {unwatched_count} | Movies Watched: {watched_count}"
 
 
 if __name__ == '__main__':
