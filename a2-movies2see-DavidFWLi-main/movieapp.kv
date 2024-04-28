@@ -1,0 +1,105 @@
+<MovieApp>:
+    orientation: 'vertical'
+    padding: 10
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10
+
+        BoxLayout:
+            size_hint_y: None
+            height: '48dp'
+            orientation: 'horizontal'
+            spacing: 10
+
+            Label:
+                text: 'Welcome to Movie2see :)'
+                size_hint_y: None
+                height: '48dp'
+
+            Label:
+                text: f"Movies to Watch: {len([movie for movie in app.movies if movie[3] == UNWATCHED])} | Movies Watched: {len([movie for movie in app.movies if movie[3] == WATCHED])}"
+                id: movie_count_label
+                height: '48dp'
+
+        GridLayout:
+            cols: 2
+            spacing: 10
+
+            Button:
+                id: add_button
+                text: 'Add Movie'
+                size_hint_y: None
+                height: '48dp'
+                on_press: app.add_movie(self)
+
+            Button:
+                text: 'Clear'
+                size_hint_y: None
+                height: '48dp'
+                on_press: app.clear_inputs(self)
+
+            Label:
+                text: 'Title:'
+            TextInput:
+                id: title_input
+                multiline: False
+
+            Label:
+                text: 'Year:'
+            TextInput:
+                id: year_input
+                input_type: 'number'
+
+            Label:
+                text: 'Category:'
+            TextInput:
+                id: category_input
+                multiline: False
+
+            # Button for category
+            Button:
+                text: 'Category'
+                size_hint_y: None
+                height: '48dp'
+                on_press: app.show_categories()
+
+        ScrollView:
+            do_scroll_x: false
+
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: 5
+
+                Label:
+                    text: 'Sort:'  # Change text here
+
+                GridLayout:
+                    cols: 1  # Set only one column for movie buttons
+                    spacing: 5
+                    size_hint_y: None
+                    height: self.minimum_height  # Automatically adjust height
+
+                    Button:
+                        text: 'Sample Movie 1'
+                        size_hint_x: 1  # Fill available width
+                        size_hint_y: None
+                        height: '100dp'
+                        canvas.before:
+                            Color:
+                                rgba: (0, 88, 88, 1)
+
+                    Button:
+                        text: 'Sample Movie 2'
+                        size_hint_x: 1  # Fill available width
+                        size_hint_y: None
+                        height: '100dp'
+                        canvas.before:
+                            Color:
+                                rgba: (88, 88, 0, 1)
+
+                    Button:
+                        text: 'Category'
+                        size_hint_y: None
+                        height: '48dp'
+                        on_press: app.show_categories()
