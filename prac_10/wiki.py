@@ -28,6 +28,10 @@ def main():
             # Handle page not found
             print("Page not found. Please enter a valid page title or search phrase.")
 
+        except Exception as e:
+            # Handle other unexpected errors
+            print("An error occurred:", str(e))
+
 
 if __name__ == "__main__":
     main()
